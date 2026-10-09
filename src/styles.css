@@ -1,0 +1,157 @@
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource/barlow-semi-condensed/600.css";
+@import "@fontsource/barlow-semi-condensed/700.css";
+@import "tailwindcss";
+
+/* Tokens are the dyosmos design system (applications/web/src/styles.css). The only addition is
+   --dy-font-mono, because a vim trainer is mostly a code surface. */
+@theme inline {
+  --font-sans: var(--dy-font-body);
+  --font-display: var(--dy-font-display);
+  --font-mono: var(--dy-font-mono);
+
+  --color-canvas: var(--dy-color-canvas);
+  --color-surface: var(--dy-color-surface);
+  --color-surface-raised: var(--dy-color-surface-raised);
+  --color-surface-muted: var(--dy-color-surface-muted);
+  --color-foreground: var(--dy-color-foreground);
+  --color-foreground-muted: var(--dy-color-foreground-muted);
+  --color-foreground-subtle: var(--dy-color-foreground-subtle);
+  --color-border: var(--dy-color-border);
+  --color-border-strong: var(--dy-color-border-strong);
+  --color-primary: var(--dy-color-primary);
+  --color-on-primary: var(--dy-color-on-primary);
+  --color-success: var(--dy-color-success);
+  --color-warning: var(--dy-color-warning);
+  --color-on-warning: var(--dy-color-on-warning);
+  --color-danger: var(--dy-color-danger);
+  --color-info: var(--dy-color-info);
+}
+
+:root {
+  --dy-font-body: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --dy-font-display: "Barlow Semi Condensed", "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --dy-font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --dy-color-canvas: #f4f7f5;
+  --dy-color-surface: #ffffff;
+  --dy-color-surface-raised: #ffffff;
+  --dy-color-surface-muted: #e9efec;
+  --dy-color-foreground: #17201d;
+  --dy-color-foreground-muted: #52605b;
+  --dy-color-foreground-subtle: #718079;
+  --dy-color-border: #d7dfdb;
+  --dy-color-border-strong: #aab8b1;
+  --dy-color-primary: #147d64;
+  --dy-color-on-primary: #ffffff;
+  --dy-color-success: #147d64;
+  --dy-color-warning: #a86600;
+  --dy-color-on-warning: #ffffff;
+  --dy-color-danger: #b83c43;
+  --dy-color-info: #315c75;
+  --dy-shadow-sm: 0 1px 2px rgb(23 32 29 / 0.08);
+  --dy-shadow-md: 0 8px 24px rgb(23 32 29 / 0.12);
+  --dy-radius-sm: 4px;
+  --dy-radius-md: 6px;
+  color-scheme: light;
+  font-family: var(--dy-font-body);
+  background: var(--dy-color-canvas);
+}
+
+:root[data-color-scheme="dark"] {
+  --dy-color-canvas: #101513;
+  --dy-color-surface: #18201e;
+  --dy-color-surface-raised: #202a27;
+  --dy-color-surface-muted: #26312e;
+  --dy-color-foreground: #f3f7f5;
+  --dy-color-foreground-muted: #aebbb5;
+  --dy-color-foreground-subtle: #82918a;
+  --dy-color-border: #34413c;
+  --dy-color-border-strong: #52625b;
+  --dy-color-primary: #3bc3a0;
+  --dy-color-on-primary: #0d211b;
+  --dy-color-success: #3bc3a0;
+  --dy-color-warning: #f0b23f;
+  --dy-color-on-warning: #101513;
+  --dy-color-danger: #f26b70;
+  --dy-color-info: #78b7d1;
+  --dy-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.25);
+  --dy-shadow-md: 0 10px 28px rgb(0 0 0 / 0.32);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--dy-color-canvas);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  background: var(--dy-color-canvas);
+  color: var(--dy-color-foreground);
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--dy-color-primary) 30%, transparent);
+}
+
+.dy-display {
+  font-family: var(--dy-font-display);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.dy-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* A key cap: how every vim command is written on screen. */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  min-width: 1.6em;
+  justify-content: center;
+  padding: 0 0.4em;
+  border: 1px solid var(--dy-color-border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--dy-radius-sm);
+  background: var(--dy-color-surface-muted);
+  color: var(--dy-color-foreground);
+  font-family: var(--dy-font-mono);
+  font-size: 0.85em;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+@keyframes dy-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.dy-shake {
+  animation: dy-shake 0.35s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
