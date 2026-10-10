@@ -29,6 +29,7 @@ No hjkl drills. Arrow keys work everywhere; they just cost keystrokes, so you'll
 | 4. Whole lines | `dd` `3dd` `o` `O` `yy` `p` `I` `A` `cc` |
 | 5. Find and search | `f` `t` `;` `ct-` `ci"` `di[` `/search` `n` `.` |
 | 6. Exam moves | `>>` `<<` `V` + `>` `:%s/old/new/g` + a boss level |
+| 7. Copy and adapt | `dG` `:g/pat/d` `2yy` `ciW` `P` `:'<,'>s` `:9,12d` `*` `cgn` `Ctrl-v` `Ctrl-a` + a boss level |
 
 The in-game cheatsheet also covers the `~/.vimrc` to set up in the first 30 seconds of the exam
 (`set expandtab tabstop=2 shiftwidth=2 autoindent number`) and `:set paste`.

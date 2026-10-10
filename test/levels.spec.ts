@@ -67,5 +67,5 @@ test("progress is remembered on the map", async ({ page }) => {
   await open(page, "1-1");
   await play(page, ":wq<CR>");
   await page.goto("#/");
-  await expect(page.getByText("3 / 114 stars")).toBeVisible();
+  await expect(page.getByText(`3 / ${levels.length * 3} stars`)).toBeVisible();
 });

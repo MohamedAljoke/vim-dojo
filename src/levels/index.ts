@@ -4,13 +4,14 @@ import { words } from "./chapter-3-words";
 import { lines } from "./chapter-4-lines";
 import { find } from "./chapter-5-find";
 import { cka } from "./chapter-6-cka";
+import { adapt } from "./chapter-7-adapt";
 import { tokenize } from "./keys";
 import type { ChapterSpec, Level, LevelSpec } from "./types";
 
 const CURSOR_MARK = "‸";
 const TARGET_MARK = "◎";
 
-export const chapterSpecs: ChapterSpec[] = [survive, jump, words, lines, find, cka];
+export const chapterSpecs: ChapterSpec[] = [survive, jump, words, lines, find, cka, adapt];
 
 function build(spec: LevelSpec, chapter: number, index: number, chapterTitle: string): Level {
   // Each mark's offset is measured with the other mark removed, whichever comes first.

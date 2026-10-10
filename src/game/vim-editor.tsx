@@ -223,6 +223,8 @@ export function VimEditor({ doc, cursor, targetPos, locked, ...events }: VimEdit
           history(),
           indentUnit.of("  "),
           EditorState.tabSize.of(2),
+          // Visual-block insert (<C-v> … I) types on every line through one cursor per line.
+          EditorState.allowMultipleSelections.of(true),
           insertTabAsSpaces,
           keymap.of([...defaultKeymap, ...historyKeymap]),
           theme,

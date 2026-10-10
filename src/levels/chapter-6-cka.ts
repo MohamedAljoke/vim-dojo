@@ -3,7 +3,7 @@ import { yaml } from "./yaml";
 
 export const cka: ChapterSpec = {
   title: "Exam moves",
-  blurb: "Indentation, find-and-replace, and a timed-feeling boss fight. Then you are ready.",
+  blurb: "Indentation, find-and-replace, and a timed-feeling boss fight.",
   levels: [
     {
       title: "Indent a line",
