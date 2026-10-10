@@ -95,9 +95,9 @@ function LevelGame({ level }: { level: Level }) {
         </div>
       </header>
 
-      <section className="flex items-start gap-3 rounded-md border border-border bg-surface p-4 shadow-sm">
+      <section className="flex items-start gap-3 rounded-xl border border-border bg-surface p-4">
         {level.kind === "edit" ? (
-          <FilePen aria-hidden className="mt-0.5 shrink-0 text-primary" size={20} />
+          <FilePen aria-hidden className="mt-0.5 shrink-0 text-info" size={20} />
         ) : (
           <Crosshair aria-hidden className="mt-0.5 shrink-0 text-warning" size={20} />
         )}
@@ -136,7 +136,7 @@ function LevelGame({ level }: { level: Level }) {
           </div>
 
           <div
-            className="overflow-hidden rounded-md border border-border bg-surface shadow-sm"
+            className="overflow-hidden rounded-xl border border-border bg-surface"
             ref={editorFrame}
           >
             <div className="flex items-center gap-2 border-b border-border bg-surface-muted px-3 py-2 font-mono text-xs text-foreground-muted">
@@ -161,7 +161,7 @@ function LevelGame({ level }: { level: Level }) {
             {game.feedback ? (
               <p
                 className={cx(
-                  "rounded-md border px-3 py-2 text-sm",
+                  "rounded-lg border px-3 py-2 text-sm",
                   game.feedback.tone === "rose" && "border-danger/30 bg-danger/10 text-danger",
                   game.feedback.tone === "info" && "border-info/30 bg-info/10 text-info",
                   game.feedback.tone === "amber" && "border-warning/30 bg-warning/10 text-warning",
@@ -177,8 +177,8 @@ function LevelGame({ level }: { level: Level }) {
             )}
           </div>
 
-          <div className="rounded-md border border-border bg-surface p-3">
-            <p className="text-xs font-semibold uppercase text-foreground-subtle">Your keys</p>
+          <div className="rounded-xl border border-border bg-surface p-3">
+            <p className="dy-label">Your keys</p>
             <div className="mt-2 min-h-7">
               {game.keys.length ? (
                 <Keys sequence={game.keys.join("")} />
@@ -192,7 +192,7 @@ function LevelGame({ level }: { level: Level }) {
         <aside className="flex flex-col gap-4">
           {level.kind === "edit" ? <TargetPanel doc={game.doc} target={level.target!} /> : null}
 
-          <section className="rounded-md border border-border bg-surface p-4">
+          <section className="rounded-xl border border-border bg-surface p-4">
             <h2 className="dy-display text-lg text-foreground">Moves for this level</h2>
             <ul className="mt-3 flex flex-col gap-3">
               {level.teaches.map((t) => (
@@ -209,7 +209,7 @@ function LevelGame({ level }: { level: Level }) {
             ) : null}
           </section>
 
-          <section className="rounded-md border border-border bg-surface p-4">
+          <section className="rounded-xl border border-border bg-surface p-4">
             <Button onClick={() => setShowSolution((s) => !s)} size="sm" variant="ghost">
               {showSolution ? <EyeOff aria-hidden size={17} /> : <Eye aria-hidden size={17} />}
               {showSolution ? "Hide" : "Show"} a par solution
@@ -242,15 +242,15 @@ function TargetPanel({ doc, target }: { doc: string; target: string }) {
   const lines = normalize(target).split("\n");
   const extra = Math.max(0, current.length - lines.length);
   return (
-    <section className="rounded-md border border-border bg-surface p-4">
+    <section className="rounded-xl border border-border bg-surface p-4">
       <h2 className="dy-display text-lg text-foreground">Target</h2>
       <p className="text-xs text-foreground-subtle">Highlighted lines don't match yet.</p>
-      <pre className="mt-3 overflow-x-auto rounded-sm bg-surface-muted py-2 font-mono text-xs leading-6">
+      <pre className="mt-3 overflow-x-auto rounded-lg border border-border bg-code py-2 font-mono text-xs leading-6">
         {lines.map((line, i) => (
           <div
             className={cx(
               "px-3",
-              current[i] === line ? "text-foreground-muted" : "bg-warning/15 text-foreground",
+              current[i] === line ? "text-foreground-muted" : "bg-highlight text-foreground",
             )}
             key={i}
           >
@@ -292,7 +292,7 @@ function WinDialog({ level, stars, keystrokes, typed, next, onRetry }: WinDialog
       <div
         aria-labelledby="win-title"
         aria-modal="true"
-        className="w-full max-w-lg rounded-md border border-border bg-surface-raised p-6 shadow-md"
+        className="w-full max-w-lg rounded-xl border border-border bg-surface-raised p-6 shadow-md"
         onKeyDown={(e) => {
           if (e.key === "r") onRetry();
         }}
@@ -308,7 +308,7 @@ function WinDialog({ level, stars, keystrokes, typed, next, onRetry }: WinDialog
 
         <dl className="mt-5 grid gap-4 text-sm">
           <div>
-            <dt className="text-xs font-semibold uppercase text-foreground-subtle">
+            <dt className="dy-label">
               You · {keystrokes} keys
             </dt>
             <dd className="mt-1.5">
@@ -316,7 +316,7 @@ function WinDialog({ level, stars, keystrokes, typed, next, onRetry }: WinDialog
             </dd>
           </div>
           <div>
-            <dt className="text-xs font-semibold uppercase text-foreground-subtle">Par · {level.par} keys</dt>
+            <dt className="dy-label">Par · {level.par} keys</dt>
             <dd className="mt-1.5">
               <Keys sequence={level.solution} />
             </dd>

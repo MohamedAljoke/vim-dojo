@@ -6,8 +6,8 @@ import { cx } from "./lib/cx";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
   cx(
-    "inline-flex h-10 items-center rounded-md px-3 text-sm font-semibold transition",
-    isActive ? "bg-surface-muted text-foreground" : "text-foreground-muted hover:text-foreground",
+    "inline-flex h-9 items-center rounded-full px-4 text-sm font-semibold transition",
+    isActive ? "bg-primary text-on-primary" : "text-foreground-muted hover:text-foreground",
   );
 
 export function App() {
@@ -17,7 +17,7 @@ export function App() {
       <header className="border-b border-border bg-surface">
         <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-2">
           <NavLink className="mr-4 flex items-center gap-2" to="/">
-            <span className="grid size-8 place-items-center rounded-md bg-primary font-mono text-sm font-bold text-on-primary">
+            <span className="grid size-8 place-items-center rounded-lg bg-accent font-mono text-sm font-bold text-on-accent">
               :w
             </span>
             <span className="dy-display text-xl text-foreground">vim dojo</span>
@@ -32,7 +32,7 @@ export function App() {
           </nav>
           <button
             aria-label={scheme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-            className="ml-auto grid size-10 cursor-pointer place-items-center rounded-md border border-border bg-surface text-foreground-muted shadow-sm transition hover:bg-surface-muted hover:text-foreground"
+            className="ml-auto grid size-9 cursor-pointer place-items-center rounded-full border border-border bg-surface text-foreground-muted transition hover:border-border-strong hover:text-foreground"
             onClick={toggle}
             type="button"
           >

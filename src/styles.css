@@ -1,11 +1,12 @@
-@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource-variable/instrument-sans";
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/fraunces/opsz-italic.css";
 @import "@fontsource-variable/jetbrains-mono";
-@import "@fontsource/barlow-semi-condensed/600.css";
-@import "@fontsource/barlow-semi-condensed/700.css";
 @import "tailwindcss";
 
-/* Tokens are the dyosmos design system (applications/web/src/styles.css). The only addition is
-   --dy-font-mono, because a vim trainer is mostly a code surface. */
+/* Tokens are the DSA Field Guide design system (dsa/assets/style.css): warm paper, cool ink,
+   blue p1 for focus/info, vermilion p2 as the accent, green ok, highlighter yellow.
+   The --dy-* names are kept as aliases so the Tailwind utilities below keep their meaning. */
 @theme inline {
   --font-sans: var(--dy-font-body);
   --font-display: var(--dy-font-display);
@@ -22,61 +23,151 @@
   --color-border-strong: var(--dy-color-border-strong);
   --color-primary: var(--dy-color-primary);
   --color-on-primary: var(--dy-color-on-primary);
+  --color-accent: var(--p2);
+  --color-accent-wash: var(--p2-wash);
+  --color-on-accent: var(--on-tone);
   --color-success: var(--dy-color-success);
+  --color-success-wash: var(--ok-wash);
+  --color-success-ink: var(--ok-ink);
   --color-warning: var(--dy-color-warning);
+  --color-warning-wash: var(--amber-wash);
   --color-on-warning: var(--dy-color-on-warning);
   --color-danger: var(--dy-color-danger);
   --color-info: var(--dy-color-info);
+  --color-info-wash: var(--p1-wash);
+  --color-highlight: var(--hl);
+  --color-code: var(--code-bg);
+
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
 }
 
 :root {
-  --dy-font-body: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
-  --dy-font-display: "Barlow Semi Condensed", "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
-  --dy-font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --dy-color-canvas: #f4f7f5;
-  --dy-color-surface: #ffffff;
-  --dy-color-surface-raised: #ffffff;
-  --dy-color-surface-muted: #e9efec;
-  --dy-color-foreground: #17201d;
-  --dy-color-foreground-muted: #52605b;
-  --dy-color-foreground-subtle: #718079;
-  --dy-color-border: #d7dfdb;
-  --dy-color-border-strong: #aab8b1;
-  --dy-color-primary: #147d64;
-  --dy-color-on-primary: #ffffff;
-  --dy-color-success: #147d64;
-  --dy-color-warning: #a86600;
-  --dy-color-on-warning: #ffffff;
-  --dy-color-danger: #b83c43;
-  --dy-color-info: #315c75;
-  --dy-shadow-sm: 0 1px 2px rgb(23 32 29 / 0.08);
-  --dy-shadow-md: 0 8px 24px rgb(23 32 29 / 0.12);
-  --dy-radius-sm: 4px;
-  --dy-radius-md: 6px;
+  --paper: oklch(97.4% 0.011 85);
+  --paper-2: oklch(94.8% 0.015 85);
+  --card: oklch(99.2% 0.005 85);
+  --ink: oklch(25% 0.035 265);
+  --ink-2: oklch(41% 0.03 265);
+  --ink-3: oklch(55% 0.025 265);
+  --rule: oklch(86.5% 0.018 85);
+  --rule-soft: oklch(91% 0.014 85);
+  --on-tone: oklch(99% 0.005 85);
+  --p1: oklch(50% 0.15 258);
+  --p1-wash: oklch(91.5% 0.045 258);
+  --p2: oklch(57% 0.18 33);
+  --p2-wash: oklch(92.5% 0.045 33);
+  --p3: oklch(50% 0.16 318);
+  --p3-wash: oklch(92.5% 0.045 318);
+  --ok: oklch(52% 0.12 155);
+  --ok-wash: oklch(91.5% 0.06 155);
+  --ok-ink: oklch(37% 0.1 155);
+  --hl: oklch(91% 0.12 100);
+  --amber: oklch(55% 0.12 70);
+  --amber-wash: oklch(93% 0.06 85);
+  --bad: oklch(52% 0.18 28);
+  --code-bg: oklch(95.6% 0.013 85);
+  --c-kw: oklch(47% 0.15 318);
+  --c-str: oklch(48% 0.11 150);
+  --c-num: oklch(54% 0.15 40);
+  --c-fn: oklch(46% 0.14 258);
+  --c-com: oklch(58% 0.02 265);
+  --shadow-md: 0 8px 24px oklch(25% 0.035 265 / 0.12);
   color-scheme: light;
+
+  --dy-font-body: "Instrument Sans Variable", "Segoe UI", system-ui, sans-serif;
+  --dy-font-display: "Fraunces Variable", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --dy-font-mono: "JetBrains Mono Variable", "Cascadia Mono", ui-monospace, Consolas, monospace;
+  --dy-color-canvas: var(--paper);
+  --dy-color-surface: var(--card);
+  --dy-color-surface-raised: var(--card);
+  --dy-color-surface-muted: var(--paper-2);
+  --dy-color-foreground: var(--ink);
+  --dy-color-foreground-muted: var(--ink-2);
+  --dy-color-foreground-subtle: var(--ink-3);
+  --dy-color-border: var(--rule);
+  --dy-color-border-strong: var(--ink-3);
+  --dy-color-primary: var(--ink);
+  --dy-color-on-primary: var(--paper);
+  --dy-color-success: var(--ok);
+  --dy-color-warning: var(--amber);
+  --dy-color-on-warning: var(--on-tone);
+  --dy-color-danger: var(--bad);
+  --dy-color-info: var(--p1);
+  --dy-shadow-sm: none;
+  --dy-shadow-md: var(--shadow-md);
+  --dy-radius-sm: 4px;
+  --dy-radius-md: 8px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   font-family: var(--dy-font-body);
   background: var(--dy-color-canvas);
 }
 
-:root[data-color-scheme="dark"] {
-  --dy-color-canvas: #101513;
-  --dy-color-surface: #18201e;
-  --dy-color-surface-raised: #202a27;
-  --dy-color-surface-muted: #26312e;
-  --dy-color-foreground: #f3f7f5;
-  --dy-color-foreground-muted: #aebbb5;
-  --dy-color-foreground-subtle: #82918a;
-  --dy-color-border: #34413c;
-  --dy-color-border-strong: #52625b;
-  --dy-color-primary: #3bc3a0;
-  --dy-color-on-primary: #0d211b;
-  --dy-color-success: #3bc3a0;
-  --dy-color-warning: #f0b23f;
-  --dy-color-on-warning: #101513;
-  --dy-color-danger: #f26b70;
-  --dy-color-info: #78b7d1;
-  --dy-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.25);
-  --dy-shadow-md: 0 10px 28px rgb(0 0 0 / 0.32);
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: oklch(20.5% 0.018 260);
+    --paper-2: oklch(23.5% 0.02 260);
+    --card: oklch(25.5% 0.02 260);
+    --ink: oklch(93% 0.012 85);
+    --ink-2: oklch(80% 0.014 85);
+    --ink-3: oklch(64% 0.016 85);
+    --rule: oklch(34% 0.02 260);
+    --rule-soft: oklch(29% 0.02 260);
+    --on-tone: oklch(19% 0.02 260);
+    --p1: oklch(75% 0.11 255);
+    --p1-wash: oklch(33% 0.06 255);
+    --p2: oklch(74% 0.14 40);
+    --p2-wash: oklch(34% 0.07 40);
+    --p3: oklch(75% 0.12 318);
+    --p3-wash: oklch(33% 0.06 318);
+    --ok: oklch(76% 0.13 155);
+    --ok-wash: oklch(34% 0.07 155);
+    --ok-ink: oklch(88% 0.09 155);
+    --hl: oklch(43% 0.08 100);
+    --amber: oklch(80% 0.12 80);
+    --amber-wash: oklch(34% 0.06 80);
+    --bad: oklch(72% 0.15 28);
+    --code-bg: oklch(18% 0.016 260);
+    --c-kw: oklch(78% 0.12 318);
+    --c-str: oklch(80% 0.12 150);
+    --c-num: oklch(78% 0.13 45);
+    --c-fn: oklch(80% 0.1 255);
+    --c-com: oklch(62% 0.02 85);
+    --shadow-md: 0 10px 28px oklch(0% 0 0 / 0.32);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: oklch(20.5% 0.018 260);
+  --paper-2: oklch(23.5% 0.02 260);
+  --card: oklch(25.5% 0.02 260);
+  --ink: oklch(93% 0.012 85);
+  --ink-2: oklch(80% 0.014 85);
+  --ink-3: oklch(64% 0.016 85);
+  --rule: oklch(34% 0.02 260);
+  --rule-soft: oklch(29% 0.02 260);
+  --on-tone: oklch(19% 0.02 260);
+  --p1: oklch(75% 0.11 255);
+  --p1-wash: oklch(33% 0.06 255);
+  --p2: oklch(74% 0.14 40);
+  --p2-wash: oklch(34% 0.07 40);
+  --p3: oklch(75% 0.12 318);
+  --p3-wash: oklch(33% 0.06 318);
+  --ok: oklch(76% 0.13 155);
+  --ok-wash: oklch(34% 0.07 155);
+  --ok-ink: oklch(88% 0.09 155);
+  --hl: oklch(43% 0.08 100);
+  --amber: oklch(80% 0.12 80);
+  --amber-wash: oklch(34% 0.06 80);
+  --bad: oklch(72% 0.15 28);
+  --code-bg: oklch(18% 0.016 260);
+  --c-kw: oklch(78% 0.12 318);
+  --c-str: oklch(80% 0.12 150);
+  --c-num: oklch(78% 0.13 45);
+  --c-fn: oklch(80% 0.1 255);
+  --c-com: oklch(62% 0.02 85);
+  --shadow-md: 0 10px 28px oklch(0% 0 0 / 0.32);
   color-scheme: dark;
 }
 
@@ -95,7 +186,22 @@ body {
   min-height: 100dvh;
   background: var(--dy-color-canvas);
   color: var(--dy-color-foreground);
-  line-height: 1.5;
+  font: 400 16px/1.55 var(--dy-font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--dy-font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--p1);
+  outline-offset: 2px;
 }
 
 button,
@@ -104,13 +210,32 @@ input {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--dy-color-primary) 30%, transparent);
+  background: var(--hl);
 }
 
 .dy-display {
   font-family: var(--dy-font-display);
+  font-optical-sizing: auto;
   font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+/* DSA's small uppercase label: section kickers, field names, panel titles. */
+.dy-kicker {
+  margin: 0;
+  font: 650 0.72rem/1.2 var(--dy-font-body);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--p2);
+}
+
+.dy-label {
+  margin: 0;
+  font: 650 0.68rem/1.2 var(--dy-font-body);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
 
 .dy-tabular {
@@ -124,15 +249,22 @@ input {
   min-width: 1.6em;
   justify-content: center;
   padding: 0 0.4em;
-  border: 1px solid var(--dy-color-border-strong);
+  border: 1px solid var(--rule);
   border-bottom-width: 2px;
-  border-radius: var(--dy-radius-sm);
-  background: var(--dy-color-surface-muted);
-  color: var(--dy-color-foreground);
-  font-family: var(--dy-font-mono);
-  font-size: 0.85em;
-  line-height: 1.6;
+  border-radius: 5px;
+  background: var(--card);
+  color: var(--ink-2);
+  font: 600 0.85em/1.6 var(--dy-font-mono);
   white-space: pre;
+}
+
+/* Code must show exactly what you type: no >= → ≥ ligatures. */
+code,
+pre,
+kbd,
+.kbd,
+.cm-editor {
+  font-variant-ligatures: none;
 }
 
 @keyframes dy-shake {

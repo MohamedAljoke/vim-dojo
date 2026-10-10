@@ -16,14 +16,14 @@ export function CheatsheetPage() {
         <p className="mt-1 text-foreground-muted">Every move the levels teach, in the order they teach it.</p>
       </header>
 
-      <section className="rounded-md border border-border bg-surface p-5 shadow-sm">
+      <section className="rounded-xl border border-border bg-surface p-5">
         <h2 className="dy-display text-2xl text-foreground">Exam setup — first 30 seconds</h2>
         <p className="mt-1 text-sm text-foreground-muted">
           kubectl edit opens <code className="font-mono">$KUBE_EDITOR</code>, then{" "}
           <code className="font-mono">$EDITOR</code>, then vi. Put these lines in{" "}
           <code className="font-mono">~/.vimrc</code> on the exam terminal before the first edit:
         </p>
-        <pre className="mt-3 overflow-x-auto rounded-sm bg-surface-muted p-3 font-mono text-sm text-foreground">
+        <pre className="mt-3 overflow-x-auto rounded-lg border border-border bg-code p-3 font-mono text-sm text-foreground">
           {examSetup.map((s) => s.line).join("\n")}
         </pre>
         <ul className="mt-3 grid gap-1 text-sm text-foreground-muted sm:grid-cols-2">
@@ -46,7 +46,7 @@ export function CheatsheetPage() {
             .flatMap((l) => l.teaches)
             .filter((t) => !seen.has(t.keys) && seen.add(t.keys));
           return (
-            <section className="rounded-md border border-border bg-surface p-5" key={chapter.number}>
+            <section className="rounded-xl border border-border bg-surface p-5" key={chapter.number}>
               <h2 className="dy-display text-xl text-foreground">
                 {chapter.number}. {chapter.title}
               </h2>

@@ -123,59 +123,62 @@ const yamlHighlight = ViewPlugin.fromClass(
   { decorations: (v) => v.decorations },
 );
 
+// Colours follow the DSA guide's code panel: p2 caret, highlighter-yellow line, p1 keys.
 const theme = EditorView.theme({
   "&": {
-    color: "var(--dy-color-foreground)",
-    backgroundColor: "var(--dy-color-surface)",
+    color: "var(--ink)",
+    backgroundColor: "var(--code-bg)",
     fontSize: "15px",
     height: "100%",
   },
   "&.cm-focused": { outline: "none" },
-  ".cm-scroller": { fontFamily: "var(--dy-font-mono)", lineHeight: "1.65" },
-  ".cm-content": { padding: "12px 0", caretColor: "var(--dy-color-primary)" },
+  ".cm-scroller": { fontFamily: "var(--dy-font-mono)", lineHeight: "1.7" },
+  ".cm-content": { padding: "12px 0", caretColor: "var(--p2)" },
   ".cm-gutters": {
-    backgroundColor: "var(--dy-color-surface)",
-    color: "var(--dy-color-foreground-subtle)",
+    backgroundColor: "var(--code-bg)",
+    color: "color-mix(in oklab, var(--ink-3) 70%, transparent)",
     border: "none",
-    borderRight: "1px solid var(--dy-color-border)",
+    borderRight: "1px solid var(--rule)",
   },
-  ".cm-activeLine": { backgroundColor: "color-mix(in srgb, var(--dy-color-primary) 7%, transparent)" },
+  ".cm-activeLine": { backgroundColor: "color-mix(in oklab, var(--hl) 45%, transparent)" },
   ".cm-activeLineGutter": {
-    backgroundColor: "color-mix(in srgb, var(--dy-color-primary) 12%, transparent)",
-    color: "var(--dy-color-foreground)",
+    backgroundColor: "var(--hl)",
+    boxShadow: "inset 3px 0 0 var(--p2)",
+    color: "var(--ink)",
+    fontWeight: "700",
   },
-  ".cm-cursor": { borderLeft: "2px solid var(--dy-color-primary)" },
+  ".cm-cursor": { borderLeft: "2px solid var(--p2)" },
   ".cm-fat-cursor": {
-    background: "var(--dy-color-primary) !important",
-    color: "var(--dy-color-on-primary) !important",
+    background: "var(--p2) !important",
+    color: "var(--on-tone) !important",
     outline: "none !important",
   },
   "&:not(.cm-focused) .cm-fat-cursor": {
     background: "none !important",
-    outline: "1px solid var(--dy-color-primary) !important",
+    outline: "1px solid var(--p2) !important",
   },
   ".cm-selectionBackground, &.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground": {
-    backgroundColor: "color-mix(in srgb, var(--dy-color-info) 35%, transparent) !important",
+    backgroundColor: "color-mix(in oklab, var(--p1) 30%, transparent) !important",
   },
   ".cm-searchMatch": {
-    backgroundColor: "color-mix(in srgb, var(--dy-color-warning) 30%, transparent)",
-    outline: "1px solid color-mix(in srgb, var(--dy-color-warning) 60%, transparent)",
+    backgroundColor: "var(--hl)",
+    outline: "1px solid color-mix(in oklab, var(--amber) 60%, transparent)",
   },
-  ".cm-yaml-key": { color: "var(--dy-color-primary)" },
-  ".cm-yaml-comment": { color: "var(--dy-color-foreground-subtle)", fontStyle: "italic" },
+  ".cm-yaml-key": { color: "var(--c-fn)" },
+  ".cm-yaml-comment": { color: "var(--c-com)", fontStyle: "italic" },
   ".cm-reach-target": {
-    outline: "2px dashed var(--dy-color-warning)",
+    outline: "2px dashed var(--p2)",
     outlineOffset: "1px",
     borderRadius: "2px",
-    backgroundColor: "color-mix(in srgb, var(--dy-color-warning) 25%, transparent)",
+    backgroundColor: "var(--p2-wash)",
   },
   ".cm-panels": {
-    backgroundColor: "var(--dy-color-surface-muted)",
-    color: "var(--dy-color-foreground)",
-    borderTop: "1px solid var(--dy-color-border) !important",
+    backgroundColor: "var(--paper-2)",
+    color: "var(--ink)",
+    borderTop: "1px solid var(--rule) !important",
   },
   ".cm-vim-panel": { fontFamily: "var(--dy-font-mono)", padding: "4px 12px", minHeight: "1.9em" },
-  ".cm-vim-panel input": { color: "var(--dy-color-foreground)", fontFamily: "var(--dy-font-mono)" },
+  ".cm-vim-panel input": { color: "var(--ink)", fontFamily: "var(--dy-font-mono)" },
 });
 
 /** Keys that insert-mode should treat like vim with `set expandtab sw=2`. */
